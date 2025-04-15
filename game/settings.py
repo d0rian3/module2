@@ -1,0 +1,40 @@
+MODE_NORMAL = 'Normal'
+MODE_HARD = 'Hard'
+MODES = {'1': MODE_NORMAL,
+         '2': MODE_HARD}
+
+PLAYER_LIVES = 3
+POINTS_FOR_FIGHT = 1
+POINTS_FOR_KILLING = 5
+MAX_RECORDS_NUMBER = 5
+HARD_MODE_MULTIPLIER = 2
+
+SCORE_FILE = 'scores.txt'
+
+PAPER = 'Paper'
+STONE = 'Stone'
+SCISSORS = 'Scissors'
+
+WIN = 1
+DRAW = 0
+LOSE = -1
+
+LIVES = 3
+
+ALLOWED_ATTACKS = {
+    1: "PAPER", #Бумага
+    2: "STONE", #Камень
+    3: "SCISSORS" #Ножницы
+}
+
+ATTACK_PAIRS_OUTCOME = {
+    (PAPER, PAPER): DRAW,
+    (PAPER, STONE): WIN,
+    (PAPER, SCISSORS): LOSE,
+    (STONE, PAPER): LOSE,
+    (STONE, STONE): DRAW,
+    (STONE, SCISSORS): WIN,
+    (SCISSORS, PAPER): WIN,
+    (SCISSORS, STONE): LOSE,
+    (SCISSORS, SCISSORS): DRAW
+}
