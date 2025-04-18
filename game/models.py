@@ -1,8 +1,7 @@
-
 from settings import PLAYER_LIVES, POINTS_FOR_KILLING
-from game.settings import ALLOWED_ATTACKS
-from game.exceptions import GameOverPlayerDead
-from game.exceptions import GameOverEnemyDead
+from settings import ALLOWED_ATTACKS
+from exceptions import GameOverPlayerDead
+from exceptions import GameOverEnemyDead
 from random import randint
 
 
