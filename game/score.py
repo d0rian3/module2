@@ -3,8 +3,8 @@ from settings import SCORE_FILE
 
 
 class ScoreHandler:
-    def __init__(self, SCORE_FILE):
-        self.SCORE_FILE = SCORE_FILE
+    def __init__(self, score_file=SCORE_FILE):
+        self.SCORE_FILE = score_file
         self.score = 0
         self.score_handler = GameRecord()
 
@@ -40,7 +40,8 @@ class GameRecord:
         self.records.append(new_record)
 
     def __str__(self):
-        return "\n".join(str(record) for record in self.records)
+        sorted_records = sorted(self.records, reverse=True)
+        return "\n".join(str(record) for record in sorted_records)
 
 
 class PlayerRecord:
