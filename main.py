@@ -6,7 +6,7 @@ def main():
 
     def play_game():
         name = input("Введите имя: ")
-        mode_opp = input("Выберите сложность \n1 - легко,\n 2 - средне,\n 3 - сложно:\n  ")
+        mode_opp = input("Выберите сложность:\n1 - легко,\n2 - средне,\n3 - сложно:\n  ")
 
         mode_opportunity = {
             "1": 1, # легко

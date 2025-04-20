@@ -41,12 +41,15 @@ class Player:
 class Enemy:
 
     def __init__(self, lives, level):
+        self.final_attack = None
         self.attack = None
         self.lives = lives
         self.level = level
 
     def select_attack(self):
         self.attack = randint(1, 3)
+        self.final_attack = ALLOWED_ATTACKS[self.attack]
+        return
     def decrease_lives(self):
         self.lives -=1
         self.level += 1
