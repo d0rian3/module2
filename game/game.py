@@ -1,7 +1,7 @@
-from exceptions import GameOverPlayerDead, GameOverEnemyDead
-from models import Enemy
-from settings import ALLOWED_ATTACKS, ATTACK_PAIRS_OUTCOME, MAX_RECORDS_NUMBER
-from settings import DRAW, WIN, LOSE
+from game.exceptions import GameOverPlayerDead, GameOverEnemyDead
+from game.models import Enemy
+from game.settings import ALLOWED_ATTACKS, ATTACK_PAIRS_OUTCOME, MAX_RECORDS_NUMBER
+from game.settings import DRAW, WIN, LOSE
 
 
 

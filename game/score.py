@@ -1,5 +1,5 @@
-from models import Player
-from settings import SCORE_FILE
+from game.models import Player
+from game.settings import SCORE_FILE
 
 
 class ScoreHandler:

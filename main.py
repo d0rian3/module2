@@ -2,12 +2,11 @@ from game.game import Game
 from game.models import Player
 from game.score import ScoreHandler
 
-
 def main():
 
     def play_game():
         name = input("Введите имя: ")
-        mode_opp = input("Выберите сложность (1 - легко,\n 2 - средне,\n 3 - сложно):  ")
+        mode_opp = input("Выберите сложность \n1 - легко,\n 2 - средне,\n 3 - сложно:\n  ")
 
         mode_opportunity = {
             "1": 1, # легко
@@ -33,7 +32,7 @@ def main():
 
 
     while True:
-        first_choise: str = input("Выберите действие: \n 1 - Запуск игры \n 2 - Посмотреть очки \n 3 - Выйти из игры")
+        first_choise: str = input("Выберите действие: \n 1 - Запуск игры\n 2 - Посмотреть очки\n 3 - Выйти из игры\n")
 
         match first_choise:
             case "1":
@@ -45,3 +44,7 @@ def main():
                 break
             case _:
                 print("Ошибка: Некорректный ввод. Попробуйте снова.")
+
+
+if __name__ == "__main__":
+    main()

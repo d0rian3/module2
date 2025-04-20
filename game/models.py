@@ -1,7 +1,7 @@
-from settings import PLAYER_LIVES, POINTS_FOR_KILLING
-from settings import ALLOWED_ATTACKS
-from exceptions import GameOverPlayerDead
-from exceptions import GameOverEnemyDead
+from game.settings import PLAYER_LIVES, POINTS_FOR_KILLING
+from game.settings import ALLOWED_ATTACKS
+from game.exceptions import GameOverPlayerDead
+from game.exceptions import GameOverEnemyDead
 from random import randint
 
 
@@ -12,15 +12,20 @@ class Player:
         self.lives = PLAYER_LIVES
         self.score = 0
 
-
     def select_attack(self):
         while True:
-            attack = input(f"{self.name}, выбери атаку {ALLOWED_ATTACKS}: ")
-            if attack in ALLOWED_ATTACKS:
-                return attack
-            else:
-                print("Некорректный выбор! Попробуй снова.")
+            print("Доступные атаки:")
+            for key, attack in ALLOWED_ATTACKS.items():
+                print(f"{key} - {attack}")
 
+            try:
+                attack_choice = int(input(f"{self.name}, выбери атаку (1, 2 или 3): "))
+                if attack_choice in ALLOWED_ATTACKS:
+                    return ALLOWED_ATTACKS[attack_choice]
+                else:
+                    print("Некорректный выбор! Попробуй снова.")
+            except ValueError:
+                print("Некорректный ввод! Пожалуйста, введите цифру (1, 2 или 3).")
 
     def decrease_lives(self):
         self.lives -= 1
