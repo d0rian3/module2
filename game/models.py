@@ -21,7 +21,7 @@ class Player:
             try:
                 attack_choice = int(input(f"{self.name}, выбери атаку (1, 2 или 3): "))
                 if attack_choice in ALLOWED_ATTACKS:
-                    return ALLOWED_ATTACKS[attack_choice]
+                    return attack_choice
                 else:
                     print("Некорректный выбор! Попробуй снова.")
             except ValueError:
@@ -48,8 +48,8 @@ class Enemy:
 
     def select_attack(self):
         self.attack = randint(1, 3)
-        self.final_attack = ALLOWED_ATTACKS[self.attack]
-        return
+
+        return self.attack
     def decrease_lives(self):
         self.lives -=1
         self.level += 1
