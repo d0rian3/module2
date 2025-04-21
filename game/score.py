@@ -1,4 +1,3 @@
-from game.models import Player
 from game.settings import SCORE_FILE
 
 
@@ -7,17 +6,24 @@ class ScoreHandler:
         self.SCORE_FILE = score_file
         self.score = 0
         self.score_handler = GameRecord()
-
+        self.read()
 
     def read(self):
         try:
             with open(self.SCORE_FILE, "r") as file:
                 for line in file:
-                    name, mode,score = line.strip().split(": ")
-                    score = int(score)
-                    self.score_handler.add_record(PlayerRecord(name, mode, score))
+                    parts = line.strip().split(": ")
+                    if len(parts) == 3:
+                        name, mode, score = parts
+                        try:
+                            score = int(score)
+                            self.score_handler.add_record(PlayerRecord(name, mode, score))
+                        except ValueError:
+                            print(f"Ошибка при чтении счета: {line}")
+                    else:
+                        print(f"Неверный формат строки: {line}")
         except FileNotFoundError:
-            pass
+            print("Файл со счетами не найден. Будет создан новый файл.")
 
     def save(self):
         with open(self.SCORE_FILE, "w") as file:
@@ -25,7 +31,13 @@ class ScoreHandler:
                 file.write(str(record) + "\n")
 
     def display(self):
-        print(self.score_handler)
+        if not self.score_handler.records:
+            print("Нет сохраненных результатов.")
+        else:
+            print("\n=== ТАБЛИЦА РЕКОРДОВ ===")
+            print(self.score_handler)
+            print("========================\n")
+
 
 class GameRecord:
     def __init__(self):
@@ -45,8 +57,7 @@ class GameRecord:
 
 
 class PlayerRecord:
-
-    def __init__(self, name, mode,score):
+    def __init__(self, name, mode, score):
         self.name = name
         self.mode = mode
         self.score = score
@@ -59,7 +70,6 @@ class PlayerRecord:
     def __eq__(self, other):
         if not isinstance(other, PlayerRecord):
             return False
-
         return self.name == other.name and self.mode == other.mode
 
     def __str__(self):

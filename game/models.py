@@ -1,4 +1,4 @@
-from game.settings import PLAYER_LIVES, POINTS_FOR_KILLING
+from game.settings import PLAYER_LIVES, POINTS_FOR_KILLING, HARD_MODE_MULTIPLIER
 from game.settings import ALLOWED_ATTACKS
 from game.exceptions import GameOverPlayerDead
 from game.exceptions import GameOverEnemyDead
@@ -7,10 +7,11 @@ from random import randint
 
 class Player:
 
-    def __init__(self, name):
+    def __init__(self, name, mode=1):
         self.name = name
         self.lives = PLAYER_LIVES
         self.score = 0
+        self.mode = mode
 
     def select_attack(self):
         while True:
@@ -32,10 +33,10 @@ class Player:
         if self.lives == 0:
             raise GameOverPlayerDead
 
-
     def add_score(self, enemy_level):
-        self.score += POINTS_FOR_KILLING * enemy_level
 
+        multiplier = HARD_MODE_MULTIPLIER if self.mode > 1 else 1
+        self.score += POINTS_FOR_KILLING * enemy_level * multiplier
 
 
 class Enemy:
@@ -48,17 +49,10 @@ class Enemy:
 
     def select_attack(self):
         self.attack = randint(1, 3)
-
         return self.attack
+
     def decrease_lives(self):
-        self.lives -=1
-        self.level += 1
+        self.lives -= 1
         if self.lives == 0:
             raise GameOverEnemyDead
         return True
-
-
-
-
-
-
