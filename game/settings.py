@@ -22,9 +22,9 @@ LOSE = -1
 LIVES = 3
 
 ALLOWED_ATTACKS = {
-    1: "PAPER", #Бумага
-    2: "STONE", #Камень
-    3: "SCISSORS" #Ножницы
+    1: PAPER, #Бумага
+    2: STONE, #Камень
+    3: SCISSORS, #Ножницы
 }
 
 ATTACK_PAIRS_OUTCOME = {
