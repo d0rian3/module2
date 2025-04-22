@@ -142,7 +142,8 @@ class TestScoreHandler(unittest.TestCase):
         self.score_handler.display()
         mock_print.assert_called_with("Нет сохраненных результатов.")
 
-
+class TestPlayerRecord(unittest.TestCase):
+    pass
 
 if __name__ == '__main__':
     unittest.main()
