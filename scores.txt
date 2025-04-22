@@ -1,1 +1,2 @@
 tymur: Normal: 25
+Арсений Зайка: Hard: 10
