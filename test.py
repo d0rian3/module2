@@ -1,4 +1,5 @@
 import unittest
+from tkinter.font import names
 from unittest.mock import patch, MagicMock, mock_open
 from game.game import Game
 from game.models import Player, Enemy
@@ -52,6 +53,8 @@ class TestModels(unittest.TestCase):
         self.assertEqual(result, DRAW)
 
     def test_handle_fight_result_win(self):
+
+        self.game.enemy.lives = 2
 
         initial_score = self.player.score
         initial_enemy_lives = self.game.enemy.lives
@@ -126,21 +129,44 @@ class TestScoreHandler(unittest.TestCase):
             unittest.mock.call("Игрок: Player1 | Уровень сложности: Normal | Очки: 100\n"),
             unittest.mock.call("Игрок: Player2 | Уровень сложности: Hard | Очки: 200\n")
         ]
-        handle.write.assert_called_once_with(expected_calls, any_order = True)
+        handle.write.assert_has_calls(expected_calls, any_order = True)
 
     @patch("builtins.print")
     def test_display_with_records(self, mock_print):
-        self.score_handler.score_handler.add_record("Player1", "Normal", 100)
-        self.score_handler.score_handler.add_record("Player2", "Hard", 200)
+        self.score_handler.score_handler.add_record(PlayerRecord("Player1", "Normal", 100))
+        self.score_handler.score_handler.add_record(PlayerRecord("Player2", "Hard", 200))
 
         self.score_handler.display()
-        mock_print.assert_any_calls("\n=== ТАБЛИЦА РЕКОРДОВ ===")
+        mock_print.assert_any_call("\n=== ТАБЛИЦА РЕКОРДОВ ===")
 
     @patch("builtins.print")
     def test_display_without_records(self, mock_print):
 
         self.score_handler.display()
         mock_print.assert_called_with("Нет сохраненных результатов.")
+
+class TestPlayerRecord(unittest.TestCase):
+    def setUp(self):
+        self.player1 = PlayerRecord("Player1", "Normal", 100)
+        self.player2 = PlayerRecord("Player1", "Hard", 200)
+        self.player3 = PlayerRecord("Player1", "Normal", 300)
+        self.player4 = PlayerRecord("Player2", "Normal", 130)
+
+    def test_equality(self):
+        same_player = PlayerRecord("Player1", "Normal", 100)
+        self.assertEqual(self.player1, same_player)
+
+        self.assertNotEqual(self.player1, self.player2)
+        self.assertNotEqual(self.player1, self.player4)
+
+    # def test_greater_than(self):
+    #     self.assertGreater(self.player3, self.player1)
+    #
+    #     with self.assertRaises(NotImplementedError):
+    #         return self.player2 > self.player1
+
+
+
 
 
 

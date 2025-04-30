@@ -1,11 +1,9 @@
 class GameOverPlayerDead(Exception):
-    @staticmethod
-    def player_dead():
+    def player_dead(self):
         print("Увы, игрок погиб")
 
 
 class GameOverEnemyDead(Exception):
-    @staticmethod
-    def enemy_dead():
+    def enemy_dead(self):
         print("Ты победил, продвигаешься на следующий уровень")
 
